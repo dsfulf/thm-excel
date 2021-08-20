@@ -1,3 +1,22 @@
+Attribute VB_Name = "THM"
+' Fast Approximate Transient Hyperbolic Model
+' Copyright (C) 2018 David S. Fulford
+
+' This library is free software; you can redistribute it and/or
+' modify it under the terms of the GNU Lesser General Public
+' License as published by the Free Software Foundation; either
+' version 2.1 of the License, or (at your option) any later version.
+
+' This library is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+' Lesser General Public License for more details.
+
+' You should have received a copy of the GNU Lesser General Public
+' License along with this library; if not, write to the Free Software
+' Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301
+' USA
+
 Option Explicit
 
 Public Type ThmParams
@@ -43,8 +62,8 @@ Private Sub Precalculate(params As ThmParams)
   ' pre-calculate all segment initial conditions
 
   params.t1 = 0#
-  params.t2 = params.telf * (e_ - 1)
-  params.t3 = params.telf * (e_ + 1)
+  params.t2 = params.telf * (e_ - 1#)
+  params.t3 = params.telf * (e_ + 1#)
 
   params.b1 = params.bi
   params.b2 = params.bi - ((params.bi - params.bf) / e_)
@@ -55,7 +74,7 @@ Private Sub Precalculate(params As ThmParams)
     params.t_term = 0#
   End If
 
-  params.D1 = ((1 - params.Di) ^ (-1 * params.bi) - 1) / params.bi / DaysPerYear
+  params.D1 = ((1# - params.Di) ^ (-1# * params.bi) - 1#) / params.bi / DaysPerYear
   params.D2 = D_fn(params, params.t2)
   params.D3 = D_fn(params, params.t3)
 
@@ -74,9 +93,9 @@ Private Sub Precalculate(params As ThmParams)
   End If
 
   If params.t_term = 0# And params.b_term > 0# Then
-    params.D_term = -Log(1 - params.b_term) / DaysPerYear
+    params.D_term = -Log(1# - params.b_term) / DaysPerYear
     params.b_term = 0#
-    params.t_term = params.t3 + (1 / params.D_term - 1 / params.D3) / params.b3
+    params.t_term = params.t3 + (1# / params.D_term - 1# / params.D3) / params.b3
     params.q_term = rate_fn(params, params.t_term)
     params.G_term = N_fn(params, params.t_term)
   End If
@@ -259,7 +278,7 @@ Public Function thm_monthly_vol(time As Double, qi As Double, Di As Double, bi A
 
   Dim t_m1 As Double, dt As Double
 
-  If time = 0 Then
+  If time = 0# Then
     thm_monthly_vol = 0#
     Exit Function
   End If
@@ -468,3 +487,5 @@ Err:
   On Error Resume Next
 
 End Function
+
+
