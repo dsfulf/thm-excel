@@ -9,4 +9,7 @@ A translation is provided from transient hyperbolic model to the modified hyperb
 
 The well data is simulated, and contains autocorrelation, random bias, random noise, and correlated outliers (downtime). The purpose of the data is to generate test cases to highlight the differences between the models. This image shows a case of long duration transient flow. The modified hyperbolic model cannot match the early-time data *and* yield an accurate forecast with the data in this example. Fitting the early-time data with the modified hyperbolic model would yield an overestimation of well recovery.
 
+___
+
+### Example Comparison of Transient Hyperbolic and Modified Hyperbolic
 ![Example Comparison](./example.png)
