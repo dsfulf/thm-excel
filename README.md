@@ -1,5 +1,9 @@
 # thm-excel
 
+#### THM Functions to call as Excel UDFs
+
+___
+
 The source file `thm.bas` provides the Transient Hyperbolic Model functions to call as Excel UDFs.
 
 The Excel workbook `THM Examples.xlsx` provides usage examples. For a detailed reference on all functions and diagnostics, as well as implementations in Python, see the
